@@ -104,7 +104,8 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "light goldenrod")
-(set-face-foreground 'region "lawn green")
+(set-face-background 'region "lawn green")
+(set-face-foreground 'region "black")
 
 ;; Show both parentheses
 (show-paren-mode 1)

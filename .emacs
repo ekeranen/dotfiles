@@ -32,8 +32,8 @@
         (other . "stroustrup" )
         )
       )
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)) ;; Open .h files as C+
-
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)) ;; Open .h files as C++
+(add-to-list 'auto-mode-alist '("wscript.*" . python-mode)) ;; Open wscript files as python
 (add-hook
  'c++-mode-hook
  '(lambda()

@@ -37,6 +37,12 @@
 (add-hook
  'c++-mode-hook
  '(lambda()
+    (add-to-list 'c-offsets-alist '(innamespace . 0))
+  )
+)
+(add-hook
+ 'c++-mode-hook
+ '(lambda()
     ;; We could place some regexes into `c-mode-common-hook', but note that their evaluation order
     ;; matters.
     (font-lock-add-keywords

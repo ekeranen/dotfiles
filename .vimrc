@@ -1,4 +1,6 @@
 behave mswin    " subtle - selected areas are deleted when you start typing
+set backspace=indent,eol,start
+syntax enable
 
 set number      " enable line numbers
 
@@ -36,3 +38,8 @@ autocmd FileType css,html,xhtml,xml setlocal shiftwidth=2 softtabstop=2
 " --- Strip trailing whitespace ---
 autocmd FileType c,cpp,java,php,ruby,python,html,xhtml,xml,css autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+if has('gui_running')
+    if has('gui_win32')
+        set guifont=consolas:h10
+    endif
+endif

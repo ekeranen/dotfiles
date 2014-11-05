@@ -1,8 +1,9 @@
 behave mswin    " subtle - selected areas are deleted when you start typing
-set backspace=indent,eol,start
-syntax enable
 
+set backspace=indent,eol,start
 set number      " enable line numbers
+set ruler
+syntax enable
 
 " --- Search ---
 set incsearch   " incremental search (match while typing)
@@ -31,6 +32,8 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 inoremap <S-Tab> <C-d>
+vnoremap <S-Tab> <
+vnoremap <Tab> >
 
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType css,html,xhtml,xml setlocal shiftwidth=2 softtabstop=2

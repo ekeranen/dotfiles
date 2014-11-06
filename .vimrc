@@ -13,10 +13,10 @@ set smartcase   " using a capital letter while searching will enable case-sensit
                 " searching
 set nowrapscan  " disable wrapping around when searching
 
-" --- Replace (Substitute) ---
+" --- Replace (substitute) ---
 set gdefault    " replace all occurrences on a line by default
 
-" --- Code Completion ---
+" --- Code completion ---
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
 
@@ -46,3 +46,6 @@ if has('gui_running')
         set guifont=consolas:h10
     endif
 endif
+
+" --- Format json ---
+command Formatjson %!python -m json.tool

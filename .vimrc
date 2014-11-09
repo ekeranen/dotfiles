@@ -1,3 +1,4 @@
+set nocompatible
 behave mswin    " subtle - selected areas are deleted when you start typing
 
 set backspace=indent,eol,start

@@ -40,7 +40,10 @@ autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType css,html,xhtml,xml setlocal shiftwidth=2 softtabstop=2
 
 " --- Strip trailing whitespace ---
-autocmd FileType c,cpp,cs,java,php,ruby,python,html,xhtml,xml,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,cs,java,javascript,php,ruby,python,html,xhtml,xml,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" --- Open wscript* as python ---
+autocmd BufRead,BufNewFile wscript* set filetype=python
 
 if has('gui_running')
     if has('gui_win32')

@@ -46,6 +46,8 @@ autocmd FileType c,cpp,cs,java,javascript,php,ruby,python,html,xhtml,xml,css aut
 autocmd BufRead,BufNewFile wscript* set filetype=python
 
 if has('gui_running')
+    set lines=45 columns=120
+
     if has('gui_win32')
         set guifont=consolas:h10
     endif

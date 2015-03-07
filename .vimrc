@@ -17,10 +17,6 @@ set nowrapscan  " disable wrapping around when searching
 " --- Replace (substitute) ---
 set gdefault    " replace all occurrences on a line by default
 
-" --- Code completion ---
-inoremap <C-Space> <C-x><C-o>
-inoremap <C-@> <C-Space>
-
 " --- Indentation ---
 filetype on
 filetype plugin on
@@ -35,6 +31,14 @@ set tabstop=4
 inoremap <S-Tab> <C-d>
 vnoremap <S-Tab> <
 vnoremap <Tab> >
+
+" --- cindent options ---
+" :     Don't indent case labels
+" g     Don't indent public/private class modifiers
+" N     Don't indent code inside namespaces
+" t     Don't indent function return types
+" c     Set comment indentation
+set cinoptions=:0,g0,N-s,t0,cs
 
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType css,html,xhtml,xml setlocal shiftwidth=2 softtabstop=2

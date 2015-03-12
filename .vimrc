@@ -49,6 +49,12 @@ autocmd FileType c,cpp,cs,java,javascript,php,ruby,python,html,xhtml,xml,css aut
 " --- Open wscript* as python ---
 autocmd BufRead,BufNewFile wscript* set filetype=python
 
+" --- Open QML as Javascript ---
+autocmd BufRead,BufNewFile *.[Qq][Mm][Ll] set filetype=javascript
+
+" --- Open AIDL as Java ---
+autocmd BufRead,BufNewFile *.[Aa][Ii][Dd][Ll] set filetype=java
+
 if has('gui_running')
     set lines=45 columns=120
 

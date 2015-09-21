@@ -41,7 +41,7 @@ vnoremap <Tab> >
 set cinoptions=:0,g0,N-s,t0,cs
 
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
-autocmd FileType css,html,xhtml,xml setlocal shiftwidth=2 softtabstop=2
+autocmd FileType css,html,xhtml setlocal shiftwidth=2 softtabstop=2
 
 " --- Strip trailing whitespace ---
 autocmd FileType c,cpp,cs,java,javascript,php,ruby,python,html,xhtml,xml,css autocmd BufWritePre <buffer> :%s/\s\+$//e

@@ -1,5 +1,5 @@
 set nocompatible
-behave mswin    " subtle - selected areas are deleted when you start typing
+behave mswin
 
 set backspace=indent,eol,start
 set number      " enable line numbers
@@ -22,8 +22,6 @@ filetype on
 filetype plugin on
 filetype indent on
 
-set omnifunc=syntaxcomplete#Complete
-
 set expandtab
 set shiftwidth=4
 set softtabstop=4
@@ -42,18 +40,19 @@ set cinoptions=:0,g0,N-s,t0,cs
 
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType css,html,xhtml setlocal shiftwidth=2 softtabstop=2
+autocmd FileType clj setlocal shiftwidth=2 softtabstop=2
 
 " --- Strip trailing whitespace ---
-autocmd FileType c,cpp,cs,java,javascript,php,ruby,python,html,xhtml,xml,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,clj,cpp,cs,css,html,java,javascript,php,python,ruby,xhtml,xml autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " --- Open wscript* as python ---
 autocmd BufRead,BufNewFile wscript* set filetype=python
 
-" --- Open QML as Javascript ---
-autocmd BufRead,BufNewFile *.[Qq][Mm][Ll] set filetype=javascript
+" --- Open .qml as Javascript ---
+autocmd BufRead,BufNewFile *.qml set filetype=javascript
 
-" --- Open AIDL as Java ---
-autocmd BufRead,BufNewFile *.[Aa][Ii][Dd][Ll] set filetype=java
+" --- Open .aidl as Java ---
+autocmd BufRead,BufNewFile *.aidl set filetype=java
 
 if has('gui_running')
     set lines=45 columns=120

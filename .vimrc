@@ -1,6 +1,9 @@
 set nocompatible
 behave mswin
 
+" Use UTF-8
+set encoding=utf-8
+
 set backspace=indent,eol,start
 set number      " enable line numbers
 set ruler
@@ -43,7 +46,7 @@ autocmd FileType css,html,xhtml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType clj setlocal shiftwidth=2 softtabstop=2
 
 " --- Strip trailing whitespace ---
-autocmd FileType c,clj,cpp,cs,css,html,java,javascript,php,python,ruby,xhtml,xml autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,clojure,cpp,cs,css,html,java,javascript,php,python,ruby,xhtml,xml autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " --- Open wscript* as python ---
 autocmd BufRead,BufNewFile wscript* set filetype=python

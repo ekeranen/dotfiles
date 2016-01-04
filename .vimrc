@@ -43,19 +43,19 @@ set cinoptions=:0,g0,N-s,t0,cs
 
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType css,html,xhtml setlocal shiftwidth=2 softtabstop=2
-autocmd FileType clj setlocal shiftwidth=2 softtabstop=2
+autocmd FileType clojure setlocal shiftwidth=2 softtabstop=2
 
 " --- Strip trailing whitespace ---
 autocmd FileType c,clojure,cpp,cs,css,html,java,javascript,php,python,ruby,xhtml,xml autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " --- Open wscript* as python ---
-autocmd BufRead,BufNewFile wscript* set filetype=python
+autocmd BufNewFile,BufRead wscript* set filetype=python
 
 " --- Open .qml as Javascript ---
-autocmd BufRead,BufNewFile *.qml set filetype=javascript
+autocmd BufNewFile,BufRead *.qml set filetype=javascript
 
 " --- Open .aidl as Java ---
-autocmd BufRead,BufNewFile *.aidl set filetype=java
+autocmd BufNewFile,BufRead *.aidl set filetype=java
 
 if has('gui_running')
     set lines=45 columns=120

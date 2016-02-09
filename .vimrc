@@ -60,6 +60,10 @@ autocmd BufNewFile,BufRead *.aidl set filetype=java
 if has('gui_running')
     set lines=45 columns=120
 
+    " Display right margin.
+    let &colorcolumn=join(range(101,999), ",")
+    highlight ColorColumn guibg=#efefef
+
     if has('gui_win32')
         set guifont=consolas:h10
     endif

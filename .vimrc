@@ -57,7 +57,7 @@ if has('gui_running')
     set lines=45 columns=120
 
     " Display right margin.
-    let &colorcolumn=join(range(101,999), ",")
+    let &colorcolumn=join(range(101, 101), ",")
     highlight ColorColumn guibg=#efefef
 
     if has('gui_win32')

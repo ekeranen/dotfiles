@@ -12,6 +12,7 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set number      " enable line numbers
 set ruler
+set scrolloff=1 " # of lines to keep above and below cursor
 
 " Search
 set hlsearch    " highlight search matches

@@ -1,0 +1,17 @@
+[user]
+	name = Eric Keranen
+	email = eric@erickeranen.com
+[alias]
+    hist = log --graph --oneline --decorate --all
+[core]
+    editor = vim
+[diff]
+	tool = bc3
+[difftool]
+    prompt = false
+[difftool "bc3"]
+	trustExitCode = true
+[merge]
+	tool = bc3
+[mergetool "bc3"]
+	trustExitCode = true

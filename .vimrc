@@ -11,10 +11,16 @@ if has('gui_running')
     else
         set guifont=Ubuntu\ Mono\ 12
     endif
+else
+    " Set the background to dark so the color scheme is more readable.
+    set background=dark
 endif
+
+let mapleader=","
 
 set backspace=indent,eol,start
 set encoding=utf-8
+set laststatus=2
 set mouse=a
 set noswapfile
 set number      " enable line numbers
@@ -35,15 +41,15 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+
 " Allow Tab and Shift+Tab for indent and de-indent.
 inoremap <S-Tab> <C-d>
 vnoremap <S-Tab> <
 vnoremap <Tab> >
 
-
 autocmd FileType c,cpp setlocal shiftwidth=2 softtabstop=2
 autocmd FileType clojure setlocal shiftwidth=2 softtabstop=2
-autocmd FileType css,html,xhtml setlocal shiftwidth=2 softtabstop=2
+autocmd FileType css,html,xhtml,yaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
 
 autocmd BufNewFile,BufRead Jenkinsfile set filetype=groovy
@@ -52,35 +58,49 @@ autocmd BufNewFile,BufRead *.aidl set filetype=java
 autocmd BufNewFile,BufRead *.qml set filetype=javascript
 
 func! StripTrailingWhitespace()
-    " Do not strip on these filetypes (we already run clang-format).
-    if &ft =~ 'c\|cpp'
+    %s/\s\+$//e
+endfunc
+
+func! StripTrailingWhitespaceFileType()
+    " Do not strip on these filetypes.
+    "   C/C++ - we already run clang-format
+    "   Markdown - trailing spaces may be significant
+    if &ft =~ 'c\|cpp\|markdown'
         return
     endif
     %s/\s\+$//e
 endfunc
 " Strip trailing whitespace. Use 'noautocmd' to temporarily disable.
-autocmd BufWritePre * call StripTrailingWhitespace()
+autocmd BufWritePre * call StripTrailingWhitespaceFileType()
 
-func! Clangformat()
-    let b:winview = winsaveview()
-    %!clang-format -style=file
-    call winrestview(b:winview)
-    unlet b:winview
-endfunc
-
-" cindent options
 set cinoptions=g1,N-s,t0,cs
 
-" Run clang-format on C/C++ code.
-autocmd FileType c,cpp autocmd BufWritePre <buffer> call Clangformat()
-autocmd FileType c,cpp nnoremap <buffer> <C-i> :call Clangformat()<CR>
+""""""""""""""""""""""
+"" vim-clang-format ""
+""""""""""""""""""""""
+let g:clang_format#detect_style_file = 1
+let g:clang_format#auto_format = 1
+
+autocmd FileType c,cpp nnoremap <C-i> :ClangFormat<CR>
+nmap mf :ClangFormatAutoToggle<CR>
 
 " Switch between C++ header and source files with F4.
 noremap <F4> :e %:p:s,.h$,.X123X,:s,.cc$,.h,:s,.X123X$,.cc,<CR>
 
-" command Clangformat %!/opt/tri/llvm/8.0.0/bin/clang-format -style=file
-
 command Formatjson %!python -m json.tool
 
-" Always show all files with ctrlp.vim.
-let g:ctrlp_max_files=0
+" ctrlp.vim settings
+let g:ctrlp_max_files=0  " Always show all files.
+
+" vim-lsc settings
+let g:lsc_server_commands = {
+    \ 'cpp': 'clangd --log=error',
+    \}
+let g:lsc_auto_map = {
+    \ 'defaults': v:true,
+    \ 'GoToDefinition': 'gd',
+    \ 'NextReference': '<Leader>nr',
+    \ 'PreviousReference': '<Leader>pr'
+    \}
+
+let g:rustfmt_autosave = 1

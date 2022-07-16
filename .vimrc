@@ -57,6 +57,11 @@ autocmd BufNewFile,BufRead wscript* set filetype=python
 autocmd BufNewFile,BufRead *.aidl set filetype=java
 autocmd BufNewFile,BufRead *.qml set filetype=javascript
 
+" C++ options.
+set cinoptions=g1,N-s,t0,cs
+" Switch between C++ header and source files with F4.
+noremap <F4> :e %:p:s,.h$,.X123X,:s,.cc$,.h,:s,.X123X$,.cc,<CR>
+
 func! StripTrailingWhitespace()
     %s/\s\+$//e
 endfunc
@@ -65,7 +70,7 @@ func! StripTrailingWhitespaceFileType()
     " Do not strip on these filetypes.
     "   C/C++ - we already run clang-format
     "   Markdown - trailing spaces may be significant
-    if &ft =~ 'c\|cpp\|markdown'
+    if &ft =~ 'c\|cpp\|markdown\|rust'
         return
     endif
     %s/\s\+$//e
@@ -73,24 +78,17 @@ endfunc
 " Strip trailing whitespace. Use 'noautocmd' to temporarily disable.
 autocmd BufWritePre * call StripTrailingWhitespaceFileType()
 
-set cinoptions=g1,N-s,t0,cs
-
-""""""""""""""""""""""
-"" vim-clang-format ""
-""""""""""""""""""""""
-let g:clang_format#detect_style_file = 1
-let g:clang_format#auto_format = 1
-
-autocmd FileType c,cpp nnoremap <C-i> :ClangFormat<CR>
-nmap mf :ClangFormatAutoToggle<CR>
-
-" Switch between C++ header and source files with F4.
-noremap <F4> :e %:p:s,.h$,.X123X,:s,.cc$,.h,:s,.X123X$,.cc,<CR>
 
 command Formatjson %!python -m json.tool
 
 " ctrlp.vim settings
 let g:ctrlp_max_files=0  " Always show all files.
+
+" vim-clang-format settings.
+let g:clang_format#detect_style_file = 1
+let g:clang_format#auto_format = 1
+autocmd FileType c,cpp nnoremap <C-i> :ClangFormat<CR>
+nnoremap <Leader>cf :ClangFormatAutoToggle<CR>
 
 " vim-lsc settings
 let g:lsc_server_commands = {

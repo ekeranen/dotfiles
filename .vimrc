@@ -2,7 +2,15 @@ set nocompatible
 behave xterm
 
 filetype plugin indent on
-syntax enable
+syntax on
+
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+    " Enable true color.
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+set termguicolors
+colorscheme onehalfdark
 
 if has('gui_running')
     set lines=45 columns=120
@@ -11,9 +19,6 @@ if has('gui_running')
     else
         set guifont=Ubuntu\ Mono\ 12
     endif
-else
-    " Set the background to dark so the color scheme is more readable.
-    set background=dark
 endif
 
 let mapleader=","
@@ -60,7 +65,7 @@ autocmd BufNewFile,BufRead *.qml set filetype=javascript
 " C++ options.
 set cinoptions=g1,N-s,t0,cs
 " Switch between C++ header and source files with F4.
-noremap <F4> :e %:p:s,.h$,.X123X,:s,.cc$,.h,:s,.X123X$,.cc,<CR>
+noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 func! StripTrailingWhitespace()
     %s/\s\+$//e
@@ -87,6 +92,7 @@ let g:ctrlp_max_files=0  " Always show all files.
 " vim-clang-format settings.
 let g:clang_format#detect_style_file = 1
 let g:clang_format#auto_format = 1
+let g:clang_format#command = "/usr/bin/clang-format-11"
 autocmd FileType c,cpp nnoremap <C-i> :ClangFormat<CR>
 nnoremap <Leader>cf :ClangFormatAutoToggle<CR>
 

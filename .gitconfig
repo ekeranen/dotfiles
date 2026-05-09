@@ -6,12 +6,17 @@
 [core]
     editor = vim
 [diff]
-	tool = bc3
+	tool = bc5
 [difftool]
-    prompt = false
-[difftool "bc3"]
+	prompt = false
+[difftool "bc5"]
+	cmd = bcomp "$LOCAL" "$REMOTE"
 	trustExitCode = true
 [merge]
-	tool = bc3
-[mergetool "bc3"]
+	tool = bc5
+[mergetool]
+	prompt = false
+	keepBackup = false
+[mergetool "bc5"]
+	cmd = bcomp "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 	trustExitCode = true

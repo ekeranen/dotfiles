@@ -1,6 +1,3 @@
-set nocompatible
-behave xterm
-
 filetype plugin indent on
 syntax on
 
@@ -9,28 +6,21 @@ if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-set termguicolors
-colorscheme onehalfdark
 
-if has('gui_running')
-    set lines=45 columns=120
-    if has('gui_win32')
-        set guifont=consolas:h10
-    else
-        set guifont=Ubuntu\ Mono\ 12
-    endif
-endif
+set background=light
+colorscheme PaperColor
 
 let mapleader=","
 
 set backspace=indent,eol,start
+set cursorline
 set encoding=utf-8
 set laststatus=2
 set mouse=a
 set noswapfile
 set number      " enable line numbers
 set ruler
-set scrolloff=1 " # of lines to keep above and below cursor
+set scrolloff=5 " # of lines to keep above and below cursor
 
 " Search
 set hlsearch    " highlight search matches
@@ -83,16 +73,12 @@ endfunc
 " Strip trailing whitespace. Use 'noautocmd' to temporarily disable.
 autocmd BufWritePre * call StripTrailingWhitespaceFileType()
 
-
-command Formatjson %!python -m json.tool
-
 " ctrlp.vim settings
 let g:ctrlp_max_files=0  " Always show all files.
 
 " vim-clang-format settings.
 let g:clang_format#detect_style_file = 1
 let g:clang_format#auto_format = 1
-let g:clang_format#command = "/usr/bin/clang-format-11"
 autocmd FileType c,cpp nnoremap <C-i> :ClangFormat<CR>
 nnoremap <Leader>cf :ClangFormatAutoToggle<CR>
 

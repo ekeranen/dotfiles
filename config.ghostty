@@ -1,0 +1,3 @@
+# Install to ~/.config/ghostty/config.ghostty
+# Light theme (list options with: ghostty +list-themes)
+theme = GitHub Light Default

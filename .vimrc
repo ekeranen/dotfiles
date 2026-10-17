@@ -6,6 +6,7 @@ if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
+set termguicolors
 
 set background=light
 colorscheme PaperColor
@@ -37,11 +38,6 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
-" Allow Tab and Shift+Tab for indent and de-indent.
-inoremap <S-Tab> <C-d>
-vnoremap <S-Tab> <
-vnoremap <Tab> >
-
 autocmd FileType c,cpp setlocal shiftwidth=2 softtabstop=2
 autocmd FileType clojure setlocal shiftwidth=2 softtabstop=2
 autocmd FileType css,html,xhtml,yaml setlocal shiftwidth=2 softtabstop=2
@@ -54,8 +50,6 @@ autocmd BufNewFile,BufRead *.qml set filetype=javascript
 
 " C++ options.
 set cinoptions=g1,N-s,t0,cs
-" Switch between C++ header and source files with F4.
-noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 func! StripTrailingWhitespace()
     %s/\s\+$//e
@@ -65,7 +59,7 @@ func! StripTrailingWhitespaceFileType()
     " Do not strip on these filetypes.
     "   C/C++ - we already run clang-format
     "   Markdown - trailing spaces may be significant
-    if &ft =~ 'c\|cpp\|markdown\|rust'
+    if &ft =~ '^\%(c\|cpp\|markdown\|rust\)$'
         return
     endif
     %s/\s\+$//e
@@ -73,24 +67,9 @@ endfunc
 " Strip trailing whitespace. Use 'noautocmd' to temporarily disable.
 autocmd BufWritePre * call StripTrailingWhitespaceFileType()
 
-" ctrlp.vim settings
-let g:ctrlp_max_files=0  " Always show all files.
-
 " vim-clang-format settings.
 let g:clang_format#detect_style_file = 1
 let g:clang_format#auto_format = 1
-autocmd FileType c,cpp nnoremap <C-i> :ClangFormat<CR>
-nnoremap <Leader>cf :ClangFormatAutoToggle<CR>
 
-" vim-lsc settings
-let g:lsc_server_commands = {
-    \ 'cpp': 'clangd --log=error',
-    \}
-let g:lsc_auto_map = {
-    \ 'defaults': v:true,
-    \ 'GoToDefinition': 'gd',
-    \ 'NextReference': '<Leader>nr',
-    \ 'PreviousReference': '<Leader>pr'
-    \}
-
+" rust.vim settings.
 let g:rustfmt_autosave = 1
